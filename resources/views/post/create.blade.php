@@ -3,8 +3,15 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             フォーム
         </h2>
+    </x-slot>
+    @if (session('message'))
+        <div class="text-red-600 font-bold p-5">
+            {{session('message')}}
+        </div>
+    @endif
     <div class="max-w-7xl mx-auto px-6">
-        <form action="">
+        <form action="{{route('post.store')}}" method="POST">
+            @csrf
             <div class="mt-8">
                 <div class="w-full flex flex-col">
                     <label for="title" class="font-semibold mt-4">件名</label>
