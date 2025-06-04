@@ -9,6 +9,11 @@
             <h1 class="text-lg font-semibold">
                 {{ $post->title}}
             </h1>
+            <div class="text-right mb-2">
+                <a href="{{route('post.edit',$post)}}">
+                    <x-primary-button>編集</x-primary-button>
+                </a>
+            </div>
             <hr class="w-full">
             <p class="mt-4 whitespace-pre-line">
                 {{$post->body}}
