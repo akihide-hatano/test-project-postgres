@@ -18,6 +18,8 @@ Route::get('post/create',[PostController::class,'create'])->name('post.create');
 Route::post('post',[PostController::class,'store'])->name('post.store');
 Route::get('post',[PostController::class,'index'])->name('post.index');
 
+Route::get('post/show/{post}',[PostController::class,'show'])->name('post.show');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
