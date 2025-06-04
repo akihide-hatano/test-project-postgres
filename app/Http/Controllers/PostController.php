@@ -48,6 +48,7 @@ class PostController extends Controller
             'body'=>'required|max:400',
         ]);
         $validated['user_id']=auth()->id();
+        $post->update($validated);
 
         $request->session()->flash('message','更新しました');
         return back();
