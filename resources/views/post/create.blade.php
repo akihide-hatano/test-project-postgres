@@ -4,11 +4,12 @@
             フォーム
         </h2>
     </x-slot>
-    @if (session('message'))
+    {{-- @if (session('message'))
         <div class="text-red-600 font-bold p-5">
             {{session('message')}}
         </div>
-    @endif
+    @endif --}}
+    <x-message :message="session('message')"/>
     <div class="max-w-7xl mx-auto px-6">
         <form action="{{route('post.store')}}" method="POST">
             @csrf
