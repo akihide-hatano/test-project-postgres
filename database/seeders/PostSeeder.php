@@ -12,6 +12,10 @@ class PostSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        \App\Models\Post::create([
+            'title'=>'テスト',
+            'body'=>'シーダーのテストを実施します',
+            'user_id'=>1,
+        ]);
     }
 }

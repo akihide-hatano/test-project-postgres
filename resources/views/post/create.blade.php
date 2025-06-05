@@ -4,11 +4,7 @@
             フォーム
         </h2>
     </x-slot>
-    @if (session('message'))
-        <div class="text-red-600 font-bold p-5">
-            {{session('message')}}
-        </div>
-    @endif
+    <x-message :message="session('message')"/>
     <div class="max-w-7xl mx-auto px-6">
         <form action="{{route('post.store')}}" method="POST">
             @csrf
@@ -24,6 +20,10 @@
                     <label for="body" class="font-semibold mt-4">本文</label>
                     <x-input-error :messages="$errors->get('body')" class="mt-2" />
                     <textarea name="body" id="body" cols="30" rows="5" class="w-auto py-2 border border-gray-300 rounded-md" value="{{old('body')}}"></textarea>
+
+                    <div class="text-right text-sm text-gray-500 mt-2">
+                        <span id="charCount">0</span>/<span id="maxChars">400</span>文字
+                    </div>
                 </div>
 
                 <x-primary-button class="mt-4">
@@ -31,4 +31,7 @@
                 </x-primary-button>
         </form>
     </div>
+        @push('scripts')
+            <script src="{{ asset('js/post/main.js') }}"></script>
+        @endpush
 </x-app-layout>
