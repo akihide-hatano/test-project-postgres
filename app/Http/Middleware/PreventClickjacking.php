@@ -19,6 +19,6 @@ class PreventClickjacking
 
         // 'DENY' を設定して、他のサイトからの埋め込みを完全に拒否します。
         $response->headers->set('X-Frame-Options', 'DENY');
-        return $next($request);
+        return $response;
     }
 }
