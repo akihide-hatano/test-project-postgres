@@ -6,7 +6,6 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-
 class PostController extends Controller
 {
     /**
@@ -32,7 +31,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        if(!auth()->check()){
+        if(!Auth::check()){
             abort(403,'ログインして投稿して下さい。');
         }
 
@@ -40,7 +39,7 @@ class PostController extends Controller
             'title'=>'required|max:20',
             'body'=>'required|max:400',
         ]);
-        $validated['user_id'] = auth()->id();
+        $validated['user_id'] = Auth::id();
 
         $post = Post::create($validated);
 
@@ -69,7 +68,7 @@ class PostController extends Controller
      */
     public function update(Request $request,Post $post)
     {
-        if ($post->user_id !== auth()->id()) {
+        if ($post->user_id !== Auth::id()) {
             abort(403, 'この投稿を更新する権限がありません。');
         }
 
@@ -90,7 +89,7 @@ class PostController extends Controller
      */
     public function destroy(Request $request,Post $post)
     {
-        if ($post->user_id !== auth()->id()) {
+        if ($post->user_id !== Auth::id()) {
             abort(403, 'この投稿を削除する権限がありません。');
         }
 
