@@ -21,5 +21,11 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         \App\Models\Post::factory(3)->create();
+        $this->call([
+            UserSeeder::class, // ★ここを追加/確認！
+            // もし今後、PostSeederなど他のSeederを作成したら、ここに追加していきます
+            // PostSeeder::class,
+            // CategorySeeder::class,
+        ]);
     }
 }
