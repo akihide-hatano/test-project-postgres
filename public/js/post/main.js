@@ -53,18 +53,6 @@ const maxCharsSpan = document.getElementById('maxChars');
     const bodyInput = document.getElementById('body');
     const bodyError = document.getElementById('bodyError');
 
-// バリデーションルールを定義 (Laravelのルールに合わせる)
-    const RULES = {
-        title: {
-            required: true,
-            max: 20
-        },
-        body: {
-            required: true,
-            max: 400
-        }
-    };
-
     if (postForm) {
         // フォーム送信時のイベントリスナー
         postForm.addEventListener('submit', function(event) {
@@ -76,25 +64,28 @@ const maxCharsSpan = document.getElementById('maxChars');
 
             // --- titleのバリデーション ---
             const titleValue = titleInput.value.trim(); // 前後の空白を除去
+            const titleRequired = true;
+            const titleMaxLength = 20;
 
             // 1. required（空項目）チェック
-            if (RULES.title.required && titleValue === '') {
+            if (titleRequired && titleValue === '') {
                 titleErrorElement.textContent = '件名は必須項目です。';
                 isValid = false; // バリデーション失敗
             }
             // 2. max（最大文字数）チェック
-            else if (RULES.title.max && titleValue.length > RULES.title.max) {
+            else if (titleValue.length > RULES.title.max) {
                 // `else if` にすることで、必須エラーが出たら文字数エラーは出さないようにする
                 titleErrorElement.textContent = `件名は${RULES.title.max}文字以内で入力してください。`;
                 isValid = false; // バリデーション失敗
             }
 
             // --- bodyのバリデーション ---
-            const bodyValue = bodyTextareaElement.value.trim(); // 前後の空白を除去
-            const bodyMaxLength = RULES.body.max; // 最大文字数を変数に格納
+            const bodyValue = bodyInput.value.trim(); // 前後の空白を除去
+            const bodyRequired = true;
+            const bodyMaxLength = 400;
 
             // 1. required（空項目）チェック
-            if (RULES.body.required && bodyValue === '') {
+            if (bodyRequired && bodyValue === '') {
                 bodyErrorElement.textContent = '本文は必須項目です。';
                 isValid = false;
             }
@@ -103,7 +94,6 @@ const maxCharsSpan = document.getElementById('maxChars');
                 bodyErrorElement.textContent = `本文は${bodyMaxLength}文字以内で入力してください。`;
                 isValid = false;
             }
-
 
             // フォーム全体のバリデーションが失敗した場合、送信を阻止
             if (!isValid) {
