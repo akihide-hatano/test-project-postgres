@@ -6,7 +6,7 @@
     </x-slot>
     <x-message :message="session('message')"/>
     <div class="max-w-7xl mx-auto px-6">
-        <form action="{{route('post.store')}}" method="POST">
+        <form action="{{route('post.store')}}" method="POST" id="postForm">
             @csrf
             <div class="mt-8">
                 <div class="w-full flex flex-col">
