@@ -20,7 +20,7 @@
                 <div class="w-full flex flex-col">
                     <label for="body" class="font-semibold mt-4">本文</label>
                     <x-input-error :messages="$errors->get('body')" class="mt-2" />
-                    <textarea name="body" id="body" cols="30" rows="5" class="w-auto py-2 border border-gray-300 rounded-md" value="{{old('body')}}"></textarea>
+                    <textarea name="body" id="body" cols="30" rows="5" class="w-auto py-2 border border-gray-300 rounded-md">{{old('body')}}</textarea>
                     <p id="bodyError" class="text-red-500 text-sm mt-1"></p>
                     <div class="text-right text-sm text-gray-500 mt-2">
                         <span id="charCount">0</span>/<span id="maxChars">400</span>文字
