@@ -73,9 +73,9 @@ const maxCharsSpan = document.getElementById('maxChars');
                 isValid = false; // バリデーション失敗
             }
             // 2. max（最大文字数）チェック
-            else if (titleValue.length > RULES.title.max) {
+            else if (titleValue.length > titleMaxLength) {
                 // `else if` にすることで、必須エラーが出たら文字数エラーは出さないようにする
-                titleErrorElement.textContent = `件名は${RULES.title.max}文字以内で入力してください。`;
+                titleErrorElement.textContent = `件名は${titleMaxLength}文字以内で入力してください。`;
                 isValid = false; // バリデーション失敗
             }
 
