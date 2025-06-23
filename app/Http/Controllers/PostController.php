@@ -14,7 +14,7 @@ class PostController extends Controller
     public function index()
     {
         // $posts = Post::all();
-        $posts = Post::paginate(3);
+        $posts = Post::with('user')->paginate(3);
         return view('post.index',compact('posts'));
     }
 
@@ -76,7 +76,6 @@ class PostController extends Controller
             'title'=>'required|max:20',
             'body'=>'required|max:400',
         ]);
-        // $validated['user_id']= auth()->id();
 
         $post->update($validated);
 
