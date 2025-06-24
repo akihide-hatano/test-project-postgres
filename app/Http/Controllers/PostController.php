@@ -88,7 +88,7 @@ class PostController extends Controller
 
     try{
         DB::transaction(function () use ($request,$post,$validated){
-        $post = Post::create($validated);
+        $post -> update($validated);
     });
         $request->session()->flash('message','保存しました');
         return redirect()->route('post.show',compact('post'));
