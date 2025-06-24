@@ -86,10 +86,17 @@ class PostController extends Controller
             'body'=>'required|max:400',
         ]);
 
-        $post->update($validated);
-
-        $request->session()->flash('message','更新しました');
+    try{
+        DB::transaction(function () use ($request,$post,$validated){
+        $post = Post::create($validated);
+    });
+        $request->session()->flash('message','保存しました');
         return redirect()->route('post.show',compact('post'));
+    }
+    catch(\Exception $e){
+        Log::error('投稿保存中にエラーが発生しました: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
+        return back()->withInput()->with('error', '投稿の更新中にエラーが発生しました。もう一度お試しください。');
+    }
     }
 
     /**

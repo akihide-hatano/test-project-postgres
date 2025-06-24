@@ -5,6 +5,11 @@
         </h2>
     </x-slot>
     <x-message :message="session('message')"/>
+        @if (session('error'))
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+            <span class="block sm:inline">{{ session('error') }}</span>
+        </div>
+    @endif
     <div class="max-w-7xl mx-auto px-6">
         <form action="{{route('post.store')}}" method="POST" id="postForm">
             @csrf
