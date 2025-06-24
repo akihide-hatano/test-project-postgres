@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class PostController extends Controller
 {
@@ -40,10 +42,18 @@ class PostController extends Controller
         ]);
         $validated['user_id'] = Auth::id();
 
+    //トランザクション開始
+    try{
+        DB::transaction(function () use ($validated){
         $post = Post::create($validated);
-
+    });
         $request->session()->flash('message','保存しました');
         return redirect()->route('post.index');
+    }
+    catch(\Exception $e){
+        Log::error('投稿保存中にエラーが発生しました: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
+        return back()->withInput()->with('error', '投稿の保存中にエラーが発生しました。もう一度お試しください。');
+    }
     }
 
     /**
